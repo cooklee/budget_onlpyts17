@@ -6,14 +6,25 @@
     <title>Title</title>
     <link href="{% static 'base.css' %}" rel="stylesheet">
 </head>
-<body>
-Witaj {{ user.username }}
-<ul class="nav">
-    <li class="nav"><a href="#">aaa</a></li>
-    <li class="nav"><a href="#">zzz</a></li>
-    <li class="nav"><a href="#">ddd</a></li>
-</ul>
-<div>{% block content %}{% endblock %}</div>
-<div></div>
+<body class="conteiner">
+{% if user.is_authenticated %}
+    Witaj {{ user.username }}
+{% endif %}
+<div class="header">
+    <ul class="nav">
+        <li class="nav"><a href="#">aaa</a></li>
+        <li class="nav"><a href="#">zzz</a></li>
+        <li class="nav"><a href="#">ddd</a></li>
+    </ul>
+    <ul class="nav">
+        {% if user.is_authenticated %}
+            <li class="nav"><a href="{% url 'logout' %}">wyloguj</a> </li>
+        {% else %}
+            <li class="nav"><a href="{% url 'login' %}">zaloguj</a> </li>
+        {% endif %}
+    </ul>
+</div>
+<div class="cont">{% block content %}{% endblock %}</div>
+<div class="footer">{{ data }} ala ma kota a kot nie ma ali <img src="{% static 'ja.jpeg' %}" width="50"> </div>
 </body>
 </html>w

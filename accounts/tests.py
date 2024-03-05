@@ -29,3 +29,8 @@ def test_create_user_post():
     response = client.post(url, data)
     assert response.status_code == 302
     user = User.objects.get(username='u')
+
+
+@pytest.mark.django_db
+def test_login_post(uzytkownik):
+    pass

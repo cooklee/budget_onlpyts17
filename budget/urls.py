@@ -18,10 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
 from accounts import views
+from wallet import views  as wallet_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", TemplateView.as_view(template_name='base.html'), name="home"),
+    path("add_wallet/", wallet_views.WalletCreateView.as_view(), name="add_wallet"),
     path("create_user/", views.CreateUserView.as_view(), name="create_user"),
     path("login/", views.LoginView.as_view(), name="login"),
     path("logout/", views.LogoutView.as_view(), name="logout"),

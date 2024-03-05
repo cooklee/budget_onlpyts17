@@ -18,7 +18,26 @@ li.nav a {
     text-decoration: none;
 }
 
+.cont{
+    min-height:500px ;
+    background-color: bisque;
+}
 /* Change the link color to #111 (black) on hover */
 li.nav a:hover {
     background-color: #111;
+}
+.header{
+    height: 50px;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: space-between;
+}
+.footer{
+    height: 100px;
+    background-color: antiquewhite;
+}
+.conteiner{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-evenly;
 }
