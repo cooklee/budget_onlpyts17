@@ -2,7 +2,7 @@
 {% block content %}
     <ul>
     {% for item in wallets %}
-        <li>{{ item }} <a href="{% url 'delete_wallet' item.pk %}"><button>x</button></a> </li>
+        <li><a href="{% url 'detail_wallet' item.pk %}"> {{ item }}</a> <a href="{% url 'delete_wallet' item.pk %}"><button>x</button></a> </li>
     {% endfor %}
     </ul>
 {% endblock %}

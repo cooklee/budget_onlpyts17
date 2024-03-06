@@ -14,3 +14,17 @@ def user2():
 @pytest.fixture
 def wallet(user):
     return Wallet.objects.create(name='test', owner=user)
+
+
+
+@pytest.fixture
+def wallets(user, user2):
+    wallets = []
+    wallets2 = []
+    for x in range(5):
+        wallet = Wallet.objects.create(name=x, owner=user)
+        wallet2 = Wallet.objects.create(name=x, owner=user2)
+        wallets.append(wallet)
+        wallets2.append(wallet2)
+    return wallets, wallets2
+

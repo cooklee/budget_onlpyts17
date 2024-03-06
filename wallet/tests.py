@@ -82,3 +82,13 @@ def test_post_wallet_delete(wallet, user2):
     assert response.status_code == 403
     assert Wallet.objects.get(pk=wallet.pk)
 
+
+@pytest.mark.django_db
+def test_list_wallets(wallets, user):
+    client = Client()
+    client.force_login(user)
+    url = reverse('list_wallet')
+    response = client.get(url)
+    assert response.status_code == 200
+    assert list(response.context['wallets']) == wallets[0]
+

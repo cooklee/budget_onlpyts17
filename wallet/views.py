@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
 
-from wallet.forms import WalletCreateForm
-from wallet.models import Wallet
+from wallet.forms import WalletCreateForm, CashFlowCreateForm
+from wallet.models import Wallet, CashFlow
 
 
 # Create your views here.
@@ -50,3 +50,29 @@ class DeleteWalletView(UserPassesTestMixin, View):
             wallet.delete()
         return redirect('list_wallet')
 
+
+class CashFlowCreateView(LoginRequiredMixin, View):
+
+    def get(self, request):
+        form = CashFlowCreateForm(user=request.user)
+        return render(request, 'form.html', {'form':form})
+
+
+    def post(self, request):
+        form = CashFlowCreateForm(request.POST, user=request.user)
+        if form.is_valid():
+            cf = form.save()
+            return redirect('home')
+        return render(request, 'form.html', {'form': form})
+
+
+class WalletDetailView(UserPassesTestMixin, View):
+
+    def test_func(self):
+        user = self.request.user
+        wallet = Wallet.objects.get(pk=self.kwargs['pk'])
+        return wallet.owner == user
+
+    def get(self, request, pk):
+        wallet = Wallet.objects.get(pk=pk)
+        return render(request, 'wallet.html', {'wallet': wallet})

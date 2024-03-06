@@ -1,6 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
+from wallet.models import CashFlow, Wallet
+
 
 # def check_len(value):
 #     if len(value) < 3:
@@ -16,3 +18,16 @@ class WalletCreateForm(forms.Form):
     )
 
 
+class CashFlowCreateForm(forms.ModelForm):
+
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['wallet'].queryset = Wallet.objects.filter(owner=user)
+
+    class Meta:
+        model = CashFlow
+        fields = "__all__"
+        widgets = {
+            'category': forms.CheckboxSelectMultiple,
+            'date': forms.DateInput(attrs={'type': 'date'})
+        }

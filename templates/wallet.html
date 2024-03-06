@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div>
+        {{ wallet.name }} : {{ wallet.balance }}
+    </div>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>Kwota</th>
+                <th>Typ</th>
+                <th>data</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for cf in wallet.cashflow_set.all %}
+                <tr>
+                    <td>{{ cf.amount }}</td>
+                    <td>{{ cf.get_type_display }}</td>
+                    <td>{{ cf.date }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+{% endblock %}
