@@ -8,7 +8,7 @@ from wallet.models import Wallet
 
 
 # Create your views here.
-class WalletCreateView(LoginRequiredMixin, View):
+class WalletCreateView(Logigit addnRequiredMixin, View):
 
     def get(self, request):
 

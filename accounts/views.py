@@ -31,12 +31,14 @@ class LoginView(View):
         return render(request, 'login.html')
 
     def post(self, request):
+        url = request.GET.get('next', 'home')
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-        return redirect('login')
+            return redirect(url)
+        return render(request, 'login.html')
 
 class LogoutView(View):
 
