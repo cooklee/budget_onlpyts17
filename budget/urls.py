@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", TemplateView.as_view(template_name='base.html'), name="home"),
     path("add_wallet/", wallet_views.WalletCreateView.as_view(), name="add_wallet"),
+    path("list_wallet/", wallet_views.WalletListView.as_view(), name="list_wallet"),
+    path("delete_wallet/<int:pk>/", wallet_views.DeleteWalletView.as_view(), name="delete_wallet"),
     path("create_user/", views.CreateUserView.as_view(), name="create_user"),
     path("login/", views.LoginView.as_view(), name="login"),
     path("logout/", views.LogoutView.as_view(), name="logout"),

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+    <ul>
+    {% for item in wallets %}
+        <li>{{ item }} <a href="{% url 'delete_wallet' item.pk %}"><button>x</button></a> </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

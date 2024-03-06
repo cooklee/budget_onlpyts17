@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+    <p>
+        czy jesteś pewien że chcesz usunąć {{ wallet }}
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="tak" name="delete">
+        <input type="submit" value="nie" name="delete">
+    </form>
+{% endblock %}

@@ -24,3 +24,23 @@ class WalletCreateView(LoginRequiredMixin, View):
             return redirect('home')
         return render(request, 'form.html', {'form': form})
 
+class WalletListView(LoginRequiredMixin, View):
+
+    def get(self, request):
+        wallets = Wallet.objects.filter(owner=request.user)
+        return render(request, 'list.html', {'wallets': wallets})
+
+
+class DeleteWalletView(LoginRequiredMixin, View):
+
+    def get(self, request, pk):
+        wallet = Wallet.objects.get(pk=pk)
+        return render(request, 'delete.html', {'wallet': wallet})
+
+    def post(self, request, pk):
+        operacja = request.POST.get('delete')
+        if operacja == 'tak':
+            wallet = Wallet.objects.get(pk=pk)
+            wallet.delete()
+        return redirect('list_wallet')
+
