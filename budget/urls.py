@@ -26,6 +26,7 @@ urlpatterns = [
     path("add_wallet/", wallet_views.WalletCreateView.as_view(), name="add_wallet"),
     path("list_wallet/", wallet_views.WalletListView.as_view(), name="list_wallet"),
     path("wallet/<int:pk>/", wallet_views.WalletDetailView.as_view(), name="detail_wallet"),
+    path("cashflow/<int:pk>/", wallet_views.CashFlowUpdateView.as_view(), name="update_cashflow"),
     path("delete_wallet/<int:pk>/", wallet_views.DeleteWalletView.as_view(), name="delete_wallet"),
     path("add_cashflow/", wallet_views.CashFlowCreateView.as_view(), name="add_cashflow"),
     path("create_user/", views.CreateUserView.as_view(), name="create_user"),

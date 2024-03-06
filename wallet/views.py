@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
 
-from wallet.forms import WalletCreateForm, CashFlowCreateForm
+from wallet.forms import WalletCreateForm, CashFlowCreateForm, CashFlowUpdateForm
 from wallet.models import Wallet, CashFlow
 
 
@@ -76,3 +76,25 @@ class WalletDetailView(UserPassesTestMixin, View):
     def get(self, request, pk):
         wallet = Wallet.objects.get(pk=pk)
         return render(request, 'wallet.html', {'wallet': wallet})
+
+
+class CashFlowUpdateView(LoginRequiredMixin, View):
+
+    def test_func(self):
+        user = self.request.user
+        cf = CashFlow.objects.get(pk=self.kwargs['pk'])
+        return cf.wallet.owner == user
+
+    def get(self, request, pk):
+        cf = CashFlow.objects.get(pk=pk)
+        form = CashFlowUpdateForm(instance=cf)
+        return render(request, 'form.html', {'form': form})
+
+    def post(self, request, pk):
+        cf = CashFlow.objects.get(pk=pk)
+        form = CashFlowUpdateForm(request.POST, instance=cf)
+        if form.is_valid():
+            form.save()
+            return redirect('detail_wallet', cf.wallet.pk)
+        return render(request, 'form.html', {'form': form})
+

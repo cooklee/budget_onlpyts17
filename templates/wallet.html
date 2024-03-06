@@ -10,14 +10,23 @@
                 <th>Kwota</th>
                 <th>Typ</th>
                 <th>data</th>
+                <th>Kategorie</th>
             </tr>
             </thead>
             <tbody>
             {% for cf in wallet.cashflow_set.all %}
                 <tr>
-                    <td>{{ cf.amount }}</td>
+                    <td><a href="{% url 'update_cashflow' cf.pk %}"> {{ cf.amount }}</a></td>
                     <td>{{ cf.get_type_display }}</td>
                     <td>{{ cf.date }}</td>
+                    <td>
+                        <ul>
+                            {% for category in cf.category.all %}
+                                <li>{{ category }}</li>
+                            {% endfor %}
+                        </ul>
+
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

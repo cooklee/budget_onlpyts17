@@ -31,3 +31,13 @@ class CashFlowCreateForm(forms.ModelForm):
             'category': forms.CheckboxSelectMultiple,
             'date': forms.DateInput(attrs={'type': 'date'})
         }
+
+class CashFlowUpdateForm(forms.ModelForm):
+    class Meta:
+        model = CashFlow
+        exclude = ['wallet', 'date']
+        widgets = {
+            'category': forms.CheckboxSelectMultiple
+        }
+
+
