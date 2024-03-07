@@ -30,7 +30,7 @@ class CashFlow(models.Model):
     amount = models.FloatField(default=0)#100  -> 150
     category = models.ManyToManyField(Category, blank=True)
     date = models.DateField()
-    type = models.IntegerField(choices=TYPES)
+    type = models.IntegerField(choices=TYPES,  blank=False)
 
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):

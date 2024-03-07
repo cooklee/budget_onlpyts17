@@ -19,6 +19,7 @@ from django.urls import path
 from django.views.generic import TemplateView
 from accounts import views
 from wallet import views  as wallet_views
+from book import views as book_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +30,8 @@ urlpatterns = [
     path("cashflow/<int:pk>/", wallet_views.CashFlowUpdateView.as_view(), name="update_cashflow"),
     path("delete_wallet/<int:pk>/", wallet_views.DeleteWalletView.as_view(), name="delete_wallet"),
     path("add_cashflow/", wallet_views.CashFlowCreateView.as_view(), name="add_cashflow"),
+    path('add_author/', book_views.CreateAuthorView.as_view(), name="add_author"),
+    path('update_author/<int:pk>/', book_views.UpdateAuthorView.as_view(), name=""),
     path("create_user/", views.CreateUserView.as_view(), name="create_user"),
     path("login/", views.LoginView.as_view(), name="login"),
     path("logout/", views.LogoutView.as_view(), name="logout"),
