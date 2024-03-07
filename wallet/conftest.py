@@ -1,7 +1,10 @@
+from datetime import datetime
+
 import pytest
 from django.contrib.auth.models import User
 
-from wallet.models import Wallet
+from wallet.models import Wallet, CashFlow
+
 
 @pytest.fixture
 def user():
@@ -16,6 +19,17 @@ def wallet(user):
     return Wallet.objects.create(name='test', owner=user)
 
 
+@pytest.fixture
+def cashflow(wallet):
+    cf = CashFlow(wallet=wallet, amount=100, date=datetime.now(), type=1)
+    cf.save()
+    return cf
+
+@pytest.fixture
+def cashflow_expanse(cashflow, wallet):
+    cf = CashFlow(wallet=wallet, amount=50, date=datetime.now(), type=2)
+    cf.save()
+    return cf
 
 @pytest.fixture
 def wallets(user, user2):
